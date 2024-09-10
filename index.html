@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+        body {
+            background: #191919;
+        }
+        .gallery { 
+            width: 900px;
+            display: flex;
+            overflow-x: scroll;
+        }    
+        .gallery div {
+            width: 100%;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-gap: 20px;
+            padding: 10px;
+            flex: none;
+        }
+        .gallery div img {
+            width: 200px;
+            height: 200px;
+            filter: grayscale(100%);
+            transition: transform 0.5s;
+        }
+        .gallery::-webkit-scrollbar {
+            display: none;
+        }
+        .gallery-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10% auto;
+        }
+        #backBtn, #nextBtn {
+            width: 50px;
+            cursor: pointer;
+            margin: 40px;
+        }
+        .gallery div img:hover {
+            filter: grayscale(0);
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-wrap">  
+        <button id="backBtn">Left</button>
+    <div class="gallery">
+        <div>
+            <span><img src="ginger_file/1725298652472.jpg"></span>
+            <span><img src="ginger_file/1725298652478.jpg"></span>
+            <span><img src="ginger_file/1725298652487.jpg"></span>
+        </div>
+        <div>
+            <span><img src="ginger_file/1725298652552.jpg"></span>
+            <span><img src="ginger_file/1725298652564.jpg"></span>
+            <span><img src="ginger_file/1725298652594.jpg"></span>
+        </div>
+    </div>
+    <button id="nextBtn">Right</button>
+</div>
+<script>
+    let scrollContainer = document.querySelector('.gallery');
+    let backBtn = document.getElementById('backBtn');
+    let nextBtn = document.getElementById('nextBtn');
+
+    scrollContainer.addEventListener('wheel', (evt) => { //event listener of the mouse wheel, targets the  div that has overflow x
+        evt.preventDefault();
+        scrollContainer.scrollLeft += evt.deltaY;
+        scrollContainer.style.scrollBehavior = "auto";
+    });
+    nextBtn.addEventListener("click", () => {
+        scrollContainer.style.scrollBehavior = "smooth";
+        scrollContainer.scrollLeft += 900;
+    });
+    backBtn.addEventListener("click", () => {
+        scrollContainer.style.scrollBehavior = "smooth";
+        scrollContainer.scrollLeft -= 900;
+    });
+
+    
+</script>
+</body>
+</html>
